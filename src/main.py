@@ -2,7 +2,7 @@
 
 from fastapi import APIRouter, FastAPI
 
-from src.schema import LocationData
+from src.schemas.location import LocationData
 
 app = FastAPI(title="Location collection and querying", openapi_url="/openapi.json")
 router = APIRouter()
