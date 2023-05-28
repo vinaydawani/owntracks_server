@@ -1,0 +1,38 @@
+name: Formatting and linting
+
+on:
+  push:
+  pull_request:
+    types:
+      - opened
+    branches:
+      - main
+
+jobs:
+  format:
+    name: formatting with black
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.11"]
+
+    steps:
+      - uses: actions/checkout@v3
+      # - name: Set up Python ${{ matrix.python-version }}
+      #   uses: actions/setup-python@v4
+      #   with:
+      #     python-version: ${{ matrix.python-version }}
+      - uses: psf/black@stable
+        with:
+          options: "--verbose --check"
+          src: "./src"
+
+  lint:
+    name: Linting with Ruff
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: chartboost/ruff-action@v1
+        with:
+          src: "./src"
