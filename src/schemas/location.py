@@ -2,7 +2,6 @@ from typing import Any, List
 
 from pydantic import BaseModel
 
-
 # class LocationData(BaseModel):
 #     acc: Optional[int] = Field(default=None)
 
@@ -40,3 +39,7 @@ class LocationOptionals(BaseModel):
 
 class LocationInsert(LocationBase, LocationOptionals):
     pass
+
+
+class LocationData(LocationBase, LocationOptionals):
+    ...
