@@ -1,6 +1,6 @@
-from typing import Any, List
+from typing import List, Optional
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 # class LocationData(BaseModel):
 #     acc: Optional[int] = Field(default=None)
@@ -16,29 +16,30 @@ class LocationBase(BaseModel):
 
 
 class LocationOptionals(BaseModel):
-    acc: int | None
-    alt: int | None
-    batt: int | None
-    cog: int | None
-    rad: int | None
-    t: str | None
-    vac: int | None
-    vel: int | None
-    p: float | None
-    poi: str | None
-    conn: str | None
-    tag: str | None
-    topic: str | None
-    inregions: List[str] | None
-    inrids: List[str] | None
-    SSID: str | None
-    BSSID: str | None
-    created_at: Any | None
-    m: int | None
+    acc: Optional[int] = Field(default=None)
+    alt: Optional[int] = Field(default=None)
+    batt: Optional[int] = Field(default=None)
+    cog: Optional[int] = Field(default=None)
+    rad: Optional[int] = Field(default=None)
+    t: Optional[str] = Field(default=None)
+    vac: Optional[int] = Field(default=None)
+    vel: Optional[int] = Field(default=None)
+    p: Optional[float] = Field(default=None)
+    poi: Optional[str] = Field(default=None)
+    conn: Optional[str] = Field(default=None)
+    tag: Optional[str] = Field(default=None)
+    topic: Optional[str] = Field(default=None)
+    inregions: Optional[List[str]] = Field(default=None)
+    inrids: Optional[List[str]] = Field(default=None)
+    SSID: Optional[str] = Field(default=None)
+    BSSID: Optional[str] = Field(default=None)
+    created_at: Optional[int] = Field(default=None)
+    m: Optional[int] = Field(default=None)
 
 
 class LocationInsert(LocationBase, LocationOptionals):
-    pass
+    class Config:
+        orm_mode = True
 
 
 class LocationData(LocationBase, LocationOptionals):
