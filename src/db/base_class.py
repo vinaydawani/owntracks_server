@@ -7,7 +7,6 @@ class_registry: Dict = {}
 
 @as_declarative(class_registry=class_registry)
 class Base:
-
     # Generate __tablename__ automatically
     @declared_attr
     def __tablename__(cls) -> str:
