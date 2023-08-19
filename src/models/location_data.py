@@ -1,37 +1,43 @@
+"""Table model to store location data generically. _type=location"""
+
 from datetime import datetime
 
-from sqlalchemy import Column, DateTime, Double, Float, Integer, String
+from sqlalchemy import DateTime, Double, Float, Integer, String
+from sqlalchemy.orm import mapped_column
 from sqlalchemy.dialects.postgresql import ARRAY
 
 from src.db.base_class import Base
 
 
 class LocationData(Base):
+    """Location class inheriting from base. Declares all the columns
+
+    """
     __tablename__ = "general_loc_data"
 
-    id = Column(Integer, primary_key=True, autoincrement="auto")
-    acc = Column(Integer(), nullable=True)
-    alt = Column(Integer(), nullable=True)
-    batt = Column(Integer(), nullable=True)
-    bs = Column(Integer(), nullable=True)
-    cog = Column(Integer(), nullable=True)
-    lat = Column(Double())
-    lon = Column(Double())
-    rad = Column(Integer(), nullable=True)
-    t = Column(String(2), nullable=True)
-    tid = Column(String())
-    tst = Column(Integer())
-    vac = Column(Integer(), nullable=True)
-    vel = Column(Integer(), nullable=True)
-    p = Column(Float(), nullable=True)
-    poi = Column(String(), nullable=True)
-    conn = Column(String(2), nullable=True)
-    tag = Column(String(), nullable=True)
-    topic = Column(String(255), nullable=True)
-    inregions = Column(ARRAY(String), nullable=True)
-    inrids = Column(ARRAY(String), nullable=True)
-    SSID = Column(String(), nullable=True)
-    BSSID = Column(String(), nullable=True)
-    created_at = Column(Integer(), nullable=True)
-    created_on = Column(DateTime(), default=datetime.now)
-    m = Column(Integer(), nullable=True)
+    id = mapped_column(Integer, primary_key=True, autoincrement="auto")
+    acc = mapped_column(Integer(), nullable=True)
+    alt = mapped_column(Integer(), nullable=True)
+    batt = mapped_column(Integer(), nullable=True)
+    bs = mapped_column(Integer(), nullable=True)
+    cog = mapped_column(Integer(), nullable=True)
+    lat = mapped_column(Double())
+    lon = mapped_column(Double())
+    rad = mapped_column(Integer(), nullable=True)
+    t = mapped_column(String(2), nullable=True)
+    tid = mapped_column(String())
+    tst = mapped_column(Integer())
+    vac = mapped_column(Integer(), nullable=True)
+    vel = mapped_column(Integer(), nullable=True)
+    p = mapped_column(Float(), nullable=True)
+    poi = mapped_column(String(), nullable=True)
+    conn = mapped_column(String(2), nullable=True)
+    tag = mapped_column(String(), nullable=True)
+    topic = mapped_column(String(255), nullable=True)
+    inregions = mapped_column(ARRAY(String), nullable=True)
+    inrids = mapped_column(ARRAY(String), nullable=True)
+    SSID = mapped_column(String(), nullable=True)
+    BSSID = mapped_column(String(), nullable=True)
+    created_at = mapped_column(Integer(), nullable=True)
+    created_on = mapped_column(DateTime(), default=datetime.now)
+    m = mapped_column(Integer(), nullable=True)
