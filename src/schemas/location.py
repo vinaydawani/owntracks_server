@@ -1,20 +1,27 @@
-from typing import Optional, List
+from typing import List, Optional
 
 from pydantic import BaseModel, Field
 
-class LocationData(BaseModel):
-    _type: str = Field(default=None)
+# class LocationData(BaseModel):
+#     acc: Optional[int] = Field(default=None)
+
+
+class LocationBase(BaseModel):
+    _type: str
+    bs: int
+    lat: float
+    lon: float
+    tid: str
+    tst: int
+
+
+class LocationOptionals(BaseModel):
     acc: Optional[int] = Field(default=None)
     alt: Optional[int] = Field(default=None)
     batt: Optional[int] = Field(default=None)
-    bs: int = Field(default=None)
     cog: Optional[int] = Field(default=None)
-    lat: float = Field(default=None)
-    lon: float = Field(default=None)
     rad: Optional[int] = Field(default=None)
     t: Optional[str] = Field(default=None)
-    tid: str = Field(default=None)
-    tst: int = Field(default=None)
     vac: Optional[int] = Field(default=None)
     vel: Optional[int] = Field(default=None)
     p: Optional[float] = Field(default=None)
@@ -29,4 +36,11 @@ class LocationData(BaseModel):
     created_at: Optional[int] = Field(default=None)
     m: Optional[int] = Field(default=None)
 
-    
+
+class LocationInsert(LocationBase, LocationOptionals):
+    class Config:
+        orm_mode = True
+
+
+class LocationData(LocationBase, LocationOptionals):
+    ...
