@@ -1,8 +1,11 @@
+"""Script for pre-run hooks"""
+
 import logging
 
 from tenacity import after_log, before_log, retry, stop_after_attempt, wait_fixed
+from sqlalchemy.sql import text
 
-from src.db.session import SessionLocal
+from db.session import SessionLocal
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -18,10 +21,11 @@ WAIT_SECONDS = 1
     after=after_log(logger, logging.WARN),
 )
 def init() -> None:
+    """ Try to create session to check if DB is awake
+    """
     try:
         _db = SessionLocal()
-        # Try to create session to check if DB is awake
-        _db.execute("SELECT 1")
+        _db.execute(text("SELECT 1"))
     except Exception as _e:
         logger.error(_e)
         raise _e
