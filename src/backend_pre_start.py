@@ -21,8 +21,7 @@ WAIT_SECONDS = 1
     after=after_log(logger, logging.WARN),
 )
 def init() -> None:
-    """ Try to create session to check if DB is awake
-    """
+    """Try to create session to check if DB is awake"""
     try:
         _db = SessionLocal()
         _db.execute(text("SELECT 1"))

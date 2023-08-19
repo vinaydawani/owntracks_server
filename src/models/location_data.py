@@ -10,9 +10,7 @@ from src.db.base_class import Base
 
 
 class Location(Base):
-    """Location class inheriting from base. Declares all the columns
-
-    """
+    """Location class inheriting from base. Declares all the columns"""
 
     id = mapped_column(Integer, primary_key=True, autoincrement="auto")
     acc = mapped_column(Integer(), nullable=True)
