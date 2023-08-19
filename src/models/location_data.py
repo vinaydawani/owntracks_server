@@ -9,11 +9,10 @@ from sqlalchemy.dialects.postgresql import ARRAY
 from src.db.base_class import Base
 
 
-class LocationData(Base):
+class Location(Base):
     """Location class inheriting from base. Declares all the columns
 
     """
-    __tablename__ = "general_loc_data"
 
     id = mapped_column(Integer, primary_key=True, autoincrement="auto")
     acc = mapped_column(Integer(), nullable=True)

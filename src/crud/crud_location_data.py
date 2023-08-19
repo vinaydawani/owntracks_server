@@ -1,10 +1,10 @@
 from src.crud.base import CRUDBase
-from src.models.location_data import LocationData
+from src.models.location_data import Location
 from src.schemas.location import LocationInsert
 
 
-class CRUDLocationData(CRUDBase[LocationData, LocationInsert]):
+class CRUDLocation(CRUDBase[Location, LocationInsert]):
     ...
 
 
-location_data = CRUDLocationData(LocationData)
+location_data = CRUDLocation(Location)
