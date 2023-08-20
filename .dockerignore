@@ -1,0 +1,15 @@
+.github/
+.ruff_cache/
+.vscode/
+alembic/
+tests/
+.env
+.gitignore
+.pylintrc
+.python-version
+LICENSE
+*.md
+__pycache__
+*.pyc
+*.pyo
+*.pyd
