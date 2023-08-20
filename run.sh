@@ -1,3 +1,5 @@
+#! /usr/bin/env bash
+
 PRE_START_PATH=${PRE_START_PATH:-./prestart.sh}  # 2
 echo "Checking for script in $PRE_START_PATH"
 if [ -f $PRE_START_PATH ] ; then
