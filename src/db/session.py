@@ -1,7 +1,11 @@
 from sqlalchemy import create_engine
 from sqlalchemy.engine import URL
 from sqlalchemy.orm import sessionmaker
-from src.core.config import config
+
+try:
+    from src.core.config import config
+except ImportError:
+    from core.config import config
 
 # from decouple import config
 
