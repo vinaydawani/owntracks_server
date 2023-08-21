@@ -5,8 +5,17 @@ from datetime import datetime
 from sqlalchemy import DateTime, Double, Float, Integer, String
 from sqlalchemy.orm import mapped_column
 from sqlalchemy.dialects.postgresql import ARRAY
+from sqlalchemy.dialects.sqlite import BLOB
 
 from src.db.base_class import Base
+from src.core.config import config
+
+
+def get_array_or_blob():
+    if config.DATABASE == "postgres":
+        return ARRAY(String)
+    elif config.DATABASE == "sqlite":
+        return BLOB()
 
 
 class Location(Base):
@@ -31,8 +40,14 @@ class Location(Base):
     conn = mapped_column(String(2), nullable=True)
     tag = mapped_column(String(), nullable=True)
     topic = mapped_column(String(255), nullable=True)
-    inregions = mapped_column(ARRAY(String), nullable=True)
-    inrids = mapped_column(ARRAY(String), nullable=True)
+    inregions = mapped_column(
+        get_array_or_blob(),
+        nullable=True,
+    )
+    inrids = mapped_column(
+        get_array_or_blob(),
+        nullable=True,
+    )
     SSID = mapped_column(String(), nullable=True)
     BSSID = mapped_column(String(), nullable=True)
     created_at = mapped_column(Integer(), nullable=True)

@@ -8,16 +8,21 @@ except ImportError:
     from core.config import config
 
 # from decouple import config
-
-SQLALCHEMY_DATABASE_URI = URL.create(
-    drivername="postgresql",
-    username=config.POSTGRES_USERNAME,
-    password=config.POSTGRES_PASSWORD,
-    host=config.POSTGRES_HOST,
-    port=config.POSTGRES_PORT,
-    database=config.POSTGRES_DB,
-)
 conn_args = {}
+
+if config.DATABASE.lower() == "postgres":
+    SQLALCHEMY_DATABASE_URI = URL.create(
+        drivername="postgresql",
+        username=config.POSTGRES_USERNAME,
+        password=config.POSTGRES_PASSWORD,
+        host=config.POSTGRES_HOST,
+        port=config.POSTGRES_PORT,
+        database=config.POSTGRES_DB,
+    )
+elif config.DATABASE.lower() == "sqlite":
+    SQLALCHEMY_DATABASE_URI = f"sqlite:///{config.SQLITE_DATA_DIR}"
+    conn_args["check_same_thread"] = False
+
 
 engine = create_engine(SQLALCHEMY_DATABASE_URI, connect_args=conn_args)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
