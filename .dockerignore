@@ -1,8 +1,9 @@
 .github/
 .ruff_cache/
 .vscode/
-alembic/
+# alembic/
 tests/
+# alembic.ini
 .env
 .gitignore
 .pylintrc
