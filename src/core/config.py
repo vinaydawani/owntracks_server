@@ -39,6 +39,10 @@ class Conf(BaseSettings):
         raise ValueError(_)
 
     # SQLALCHEMY_DATABASE_URI: Optional[str] = "sqlite:///example.db"
+    DATABASE: Optional[str] = "localhost"
+
+    SQLITE_DATA_DIR: Optional[str] = "/data"
+
     POSTGRES_USERNAME: Optional[str] = "admin"
     POSTGRES_PASSWORD: Optional[str] = "password"
     POSTGRES_HOST: Optional[str] = "localhost"

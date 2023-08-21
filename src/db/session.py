@@ -17,6 +17,7 @@ SQLALCHEMY_DATABASE_URI = URL.create(
     port=config.POSTGRES_PORT,
     database=config.POSTGRES_DB,
 )
+conn_args = {}
 
-engine = create_engine(SQLALCHEMY_DATABASE_URI)
+engine = create_engine(SQLALCHEMY_DATABASE_URI, connect_args=conn_args)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
