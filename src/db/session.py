@@ -4,11 +4,12 @@ from sqlalchemy.orm import sessionmaker
 
 try:
     from src.core.config import config
+    from src.db.base_class import Base
 except ImportError:
     from core.config import config
+    from db.base_class import Base
 
 # from decouple import config
-conn_args = {}
 
 if config.DATABASE.lower() == "postgres":
     SQLALCHEMY_DATABASE_URI = URL.create(
@@ -19,10 +20,14 @@ if config.DATABASE.lower() == "postgres":
         port=config.POSTGRES_PORT,
         database=config.POSTGRES_DB,
     )
+    engine = create_engine(SQLALCHEMY_DATABASE_URI)
 elif config.DATABASE.lower() == "sqlite":
     SQLALCHEMY_DATABASE_URI = f"sqlite:///{config.SQLITE_DATA_DIR}"
-    conn_args["check_same_thread"] = False
+    engine = create_engine(
+        SQLALCHEMY_DATABASE_URI, connect_args={"check_same_thread": False}
+    )
+    Base.metadata.create_all(engine)
 
 
-engine = create_engine(SQLALCHEMY_DATABASE_URI, connect_args=conn_args)
+# engine = create_engine(SQLALCHEMY_DATABASE_URI, connect_args=conn_args)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
