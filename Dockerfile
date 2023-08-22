@@ -1,9 +1,10 @@
 FROM python:3.11.3-slim-bullseye
 # -slim-bullseye
 
-RUN addgroup --system owntracks && adduser --system --group owntracks
+RUN addgroup --system --gid 1000 owntracks && adduser --system -u 1000 --group owntracks
 
 WORKDIR /owntracks_server/
+RUN chown owntracks:owntracks /owntracks_server/
 
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
@@ -13,16 +14,12 @@ ENV ENVIRONMENT prod
 COPY ./requirements.txt /owntracks_server/
 RUN pip install -r requirements.txt
 
-COPY . .
-
+COPY --chown=owntracks:owntracks . .
 RUN chmod +x run.sh
 
 ENV PYTHONPATH=/owntracks_server
-
-RUN chown -R owntracks:owntracks /owntracks_server/
+EXPOSE 8000
 
 USER owntracks
-
-EXPOSE 8000
 
 CMD ["./run.sh"]
