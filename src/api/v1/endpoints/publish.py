@@ -19,8 +19,7 @@ async def collect(
     db: Annotated[Session, Depends(deps.get_db)],
     req: Request
 ):
-    """Endpoint to collect all the data published through owntracks clients
-    """
+    """Endpoint to collect all the data published through owntracks clients"""
     # Pydantic v1 models don't pick up protected variables so "_type" needs to be
     # extracted from request body and assigned manually
     _type = (await req.json())["_type"]

@@ -5,5 +5,5 @@ class CmdBase(BaseModel):
     _type: str
     action: str
 
-    class Config():
-        extra="allow"
+    class Config:
+        extra = "allow"
