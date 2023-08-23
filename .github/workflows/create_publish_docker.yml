@@ -1,0 +1,48 @@
+# name: Build and Publish docker image CI pipeline
+
+# on:
+#   push:
+#     branches:
+#       - "main"
+#       - "dev"
+#       - "feature/**"
+#     tags:
+#       - "v*.*.*"
+#       - "v*.*.*-*"
+#   pull_request:
+#     types:
+#       - closed
+#     branches:
+#       - main
+#       - dev
+#   workflow_dispatch:
+
+# env:
+#   PYTHON_VERSION: "3.11.3"
+#   REGISTRY: ghcr.io
+#   IMAGE_NAME: ${{ github.repository }}
+
+# jobs:
+#   build-image:
+#     # if: github.event.pull_request.merged == true
+#     name: Build and push image
+#     runs-on: ubuntu-latest
+#     permissions:
+#       contents: read
+#       packages: write # Push
+#       id-token: write # Cosign - signing the images with GitHub OIDC Token
+#       security-events: write # Trivy - write vulnerability report
+
+#     steps:
+#       - uses: actions/checkout@v3
+
+#       - uses: actions/setup-python@v4
+#         id: setup-python
+#         with:
+#           python-version: ${{ env.PYTHON_VERSION }}
+
+#       - name: Get cache metadata
+#         id: cache-meta
+#         run: |
+#           echo "CACHE_KEY="venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/requirements.txt') }}"" >> "$GITHUB_ENV"
+#           echo "CACHE_PATH=$(pip cache dir)" >> "$GITHUB_ENV"
