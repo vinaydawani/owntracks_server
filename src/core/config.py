@@ -34,7 +34,7 @@ class Conf(BaseSettings):
         """
         if isinstance(_, str) and not _.startswith("["):
             return [i.strip() for i in _.split(",")]
-        elif isinstance(_, (list, str)):
+        if isinstance(_, (list, str)):
             return _
         raise ValueError(_)
 
