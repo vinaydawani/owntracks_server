@@ -12,7 +12,7 @@ ENV ENVIRONMENT prod
 # ENV TESTING 0
 
 COPY ./requirements.txt /owntracks_server/
-RUN pip install -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
 COPY --chown=owntracks:owntracks . .
 RUN chmod +x run.sh
