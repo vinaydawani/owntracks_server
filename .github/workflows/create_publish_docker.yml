@@ -58,7 +58,7 @@ jobs:
       - name: Bandit security check
         run: |
           source venv/bin/activate
-          bandit -r . --exit-zero
+          bandit -c bandit.yaml --exit-zero -r .
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
@@ -77,12 +77,12 @@ jobs:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           flavor: |
             latest=auto
-          tags:
+          tags: |
             type=semver,pattern={{version}}
             type=semver,pattern={{major}}.{{minor}}
             type=semver,pattern={{major}},enable=${{ !startsWith(github.ref, 'refs/tags/v0.') }}
             type=ref,event=branch
-            # type=raw,value=latest,enable={{is_default_branch}}
+            type=raw,value=latest,enable={{is_default_branch}}
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
