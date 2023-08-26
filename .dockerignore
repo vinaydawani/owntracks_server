@@ -1,0 +1,16 @@
+.github/
+.ruff_cache/
+.vscode/
+# alembic/
+tests/
+# alembic.ini
+.env
+.gitignore
+.pylintrc
+.python-version
+LICENSE
+*.md
+__pycache__
+*.pyc
+*.pyo
+*.pyd
