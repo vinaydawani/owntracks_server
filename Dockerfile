@@ -22,4 +22,7 @@ EXPOSE 8000
 
 USER owntracks
 
+HEALTHCHECK --interval=30s --retries=3 \
+  CMD curl --fail http://localhost/api/v1/hc/db || exit 1
+
 CMD ["./run.sh"]
