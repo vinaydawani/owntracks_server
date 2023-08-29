@@ -2,7 +2,7 @@
 
 from typing import Annotated
 
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from sqlalchemy.sql import text
 
@@ -20,5 +20,8 @@ async def check_db_health(*, db: Annotated[Session, Depends(deps.get_db)]):
     db : Annotated[Session, Depends
         Injecting the database and usuing it
     """
-    db.execute(text("SELECT 1"))
+    try:
+        db.execute(text("SELECT 1"))
+    except Exception as exc:
+        raise HTTPException(status_code=404, detail=exc)
     # TODO: Check if db is healthy and working fine
